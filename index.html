@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>转化追踪看板</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="dashboard_data.js"></script>
+<script src="vendor/chart.umd.min.js"></script>
+<script src="vendor/dashboard_data.js"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -1046,7 +1046,6 @@ function renderCombinedSummaryTab(key, m) {
       var c = ALL_DATA[kk];
       if (!c || !c.channels) return;
       c.channels.forEach(function(ch) {
-        if (ch === '\u4e8c\u6b21\u4f53\u9a8cL\u7cfb\u5217' || ch === '\u7ad9\u5185L\u7cfb\u5217') return;
         var td = c.data[term] ? c.data[term][ch] : null;
         if (!td) return;
         totalLeads += td.leads;
@@ -1326,7 +1325,6 @@ function switchCombinedSubTab(key) {
   // Channel grid
   html += '<div class="channel-grid">';
   channels.forEach((ch, ci) => {
-    if (ch === '二次体验L系列' || ch === '站内L系列') return; // skip L series
     const color = COLORS[ci % COLORS.length];
     html += '<div class="channel-card"><h3>' + ch + '</h3><div class="chart-wrapper"><canvas id="comb-ch-' + key + '-' + ci + '"></canvas></div></div>';
   });
@@ -1336,7 +1334,6 @@ function switchCombinedSubTab(key) {
   // Render charts  
   const terms = course.terms.slice().reverse().slice(0, 3);
   channels.forEach((ch, ci) => {
-    if (ch === '二次体验L系列' || ch === '站内L系列') return;
     const canvas = document.getElementById('comb-ch-' + key + '-' + ci);
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
